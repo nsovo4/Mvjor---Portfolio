@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bafic-Inspired Site</title>
+    <title>Mvjor - Portfolio</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,10 +15,12 @@
             text-align: center;
             min-height: 100vh;
         }
+
         header {
             background-color: #ffffff;
             padding: 1em 0;
         }
+
         nav ul {
             list-style: none;
             display: flex;
@@ -25,9 +28,11 @@
             margin: 0;
             padding: 0;
         }
+
         nav li {
             margin: 0 1em;
         }
+
         nav a {
             color: #ff0000;
             text-decoration: none;
@@ -51,7 +56,6 @@
             overflow: hidden;
         }
 
-        /* Dynamically size images to fill gaps */
         .image-container:nth-child(4n+1) { grid-column: span 1; }
         .image-container:nth-child(6n+2) { grid-column: span 2; }
         .image-container:nth-child(12n+3) { grid-column: span 2; }
@@ -67,12 +71,10 @@
             cursor: pointer;
         }
 
-        /* Hover effects */
         .image-container:hover img {
             transform: scale(1.05);
         }
 
-        /* Lightbox styles */
         .lightbox {
             display: none;
             position: fixed;
@@ -96,7 +98,6 @@
             object-fit: contain;
         }
 
-        /* Fade in animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -106,7 +107,6 @@
             animation: fadeIn 0.5s ease forwards;
         }
 
-        /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
