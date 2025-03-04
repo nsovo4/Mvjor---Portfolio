@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bafic-Inspired Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 1em 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            margin: 0 1em;
+        }
+        nav a {
+            color: #ff0000;
+            text-decoration: none;
+            font-family: Avenir, 'Avenir Next';
+            font-size: 1.2em;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding: 0;
+            max-width: 100%;
+            margin: 0 auto;
+            grid-auto-flow: dense;
+        }
+
+        .image-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dynamically size images to fill gaps */
+        .image-container:nth-child(4n+1) { grid-column: span 1; }
+        .image-container:nth-child(6n+2) { grid-column: span 2; }
+        .image-container:nth-child(12n+3) { grid-column: span 2; }
+        .image-container:nth-child(8n+4) { grid-row: span 2; }
+        .image-container:nth-child(10n+5) { grid-column: span 2; grid-row: span 2; }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover effects */
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .lightbox img {
+            max-height: 90vh;
+            max-width: 90vw;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-container {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="film.html">Film</a></li>
+                <li><a href="photo.html">Photography</a></li>
+                <li><a href="about me.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="gallery">
+        <script>
+            const images = [
+                "Pictures/00hh01_1-1-2.jpg",
+                "Pictures/00hh01_1-3.jpg",
+                "Pictures/00hh09_9-3.jpg",
+                "Pictures/0008_8 3.jpg",
+                "Pictures/00j07_7.jpg",
+                "Pictures/0jb002_2-1-2.jpg",
+                "Pictures/0jg008_8.jpg",
+                "Pictures/0jghh006_6.jpg",
+                "Pictures/000jl8_8-3.jpg",
+                "Pictures/00khjk03_3.jpg",
+                "Pictures/00kk08_8-8.jpg",
+                "Pictures/0s010_10 2.jpg",
+                "Pictures/0y009_9.jpg",
+                "Pictures/0001_1 3.jpg",
+                "Pictures/0002_2 2.jpg",
+                "Pictures/0002_2-2.jpg",
+                "Pictures/0002_2.jpg",
+                "Pictures/0005_5 2.jpg",
+                "Pictures/0005_5 3.jpg",
+                "Pictures/0005_5 4.jpg",
+                "Pictures/0005_5 5.jpg",
+                "Pictures/0005_5 6.jpg",
+                "Pictures/0005_5-2.jpg",
+                "Pictures/0005_5.jpg",
+                "Pictures/0006_6 2.jpg",
+                "Pictures/0006_6-2.jpg",
+                "Pictures/0006_6.jpg",
+                "Pictures/0007_7 2.jpg",
+                "Pictures/0007_7 3.jpg",
+                "Pictures/0007_7.jpg",
+                "Pictures/0008_8 2.jpg",
+                "Pictures/0008_8 3.jpg",
+                "Pictures/0008_8 4.jpg",
+                "Pictures/0008_8 5.jpg",
+                "Pictures/0008_8-2.jpg",
+                "Pictures/0008_8.jpg",
+                "Pictures/0009_9 2.jpg",
+                "Pictures/0009_9.jpg",
+                "Pictures/0010_10-2.jpg",
+                "Pictures/0001_1.jpg",
+                "Pictures/SSP_433-40.jpg",
+                "Pictures/SSP_401-38.jpg",
+                "Pictures/SSP_231-3.jpg",
+                "Pictures/SSP_193-41.jpg",
+                "Pictures/SSP_121-24.jpg",
+                "Pictures/SSP_66-17.jpg",
+                "Pictures/SSP_27-9.jpg",
+                "Pictures/000670800008_8-8.jpg",
+                "Pictures/000670790006_6-6.jpg",
+                "Pictures/000668470010_10-10.jpg",
+                "Pictures/000668470008_8-8.jpg",
+                "Pictures/000668460009_9-9.jpg",
+                "Pictures/000648840006_6-6.jpg",
+                "Pictures/000642230009_9-6.jpg",
+                "Pictures/000642230006_6-3.jpg",
+                "Pictures/000642230005_5-2.jpg",
+                "Pictures/000724170001_1-1.jpg",
+                "Pictures/000724160006_6-3.jpg",
+                "Pictures/000686340001_1-20.jpg",
+                "Pictures/000686330008_8-18.jpg",
+                "Pictures/000686330007_7-17.jpg",
+                "Pictures/000686330006_6-16.jpg",
+                "Pictures/000686330002_2-12.jpg",
+                "Pictures/000686320010_10-10.jpg",
+                "Pictures/000686320009_9-9.jpg",
+                "Pictures/000686320006_6-6.jpg",
+                "Pictures/000686320005_5-5.jpg",
+                "Pictures/000686320003_3-3.jpg",
+                "Pictures/000686320001_1-1.jpg",
+                "Pictures/000681000007_7-9.jpg",
+                "Pictures/000681000006_6-8.jpg",
+                "Pictures/000681000002_2-4.jpg",
+                "Pictures/000679990002_2-2.jpg",
+                "Pictures/000679990001_1-1.jpg"
+            ];
+
+            // Shuffle array for random display
+            const shuffledImages = [...images].sort(() => Math.random() - 0.5);
+
+            shuffledImages.forEach(imgSrc => {
+                document.write(`
+                    <div class="image-container">
+                        <img 
+                            src="${imgSrc}" 
+                            alt="Gallery Image"
+                            loading="lazy"
+                            onclick="openLightbox('${imgSrc}')"
+                        >
+                    </div>
+                `);
+            });
+        </script>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" onclick="closeLightbox()">
+        <img src="" alt="Lightbox Image">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            lightboxImg.src = src;
+            lightbox.style.display = 'block';
+        }
+
+        function closeLightbox() {
+            document.querySelector('.lightbox').style.display = 'none';
+        }
+
+        // Lazy loading with Intersection Observer
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.image-container').forEach(img => {
+            observer.observe(img);
+        });
+    </script>
+</body>
+</html>

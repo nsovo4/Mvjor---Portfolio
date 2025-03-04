@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bafic-Inspired Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 1em 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            margin: 0 1em;
+        }
+        nav a {
+            color: #ff0000;
+            text-decoration: none;
+            font-family: Avenir, 'Avenir Next';
+            font-size: 1.2em;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: scroll;
+            position: relative;
+            scrollbar-width: none; /* Firefox */
+            scroll-behavior: smooth; /* Add smooth scrolling */
+        }
+        .column-reverse {
+            /* Flip the content direction for odd columns */
+            transform: scaleY(-1);
+        }
+        .column-reverse > * {
+            /* Flip back the content itself so it's not upside down */
+            transform: scaleY(-1);
+        }
+        .scroll-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            will-change: transform; /* Optimize performance */
+        }
+        .column img, .column video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        /* Hide scrollbars but keep functionality */
+        .column::-webkit-scrollbar {
+            display: none;
+        }
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .lightbox img, .lightbox video {
+            max-width: 90%;
+            max-height: 80%;
+        }
+        .lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        footer {
+            background-color: #222;
+            padding: 1em 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="film.html">Film</a></li>
+                <li><a href="photo.html">Photography</a></li>
+                <li><a href="about me.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="gallery">
+            <script>
+                const media = [
+                { type: 'img', src: "Pictures/00hh01_1-1-2.jpg" },
+                { type: 'video', src: "Videos/video 27.mp4" },
+                    { type: 'img', src: "Pictures/00hh01_1-3.jpg" },
+                    { type: 'img', src: "Pictures/00hh09_9-3.jpg" },
+                    { type: 'video', src: "Videos/video 1.mp4" },
+
+                    // Group 2
+                    { type: 'img', src: "Pictures/0008_8 3.jpg" },
+                    { type: 'img', src: "Pictures/00j07_7.jpg" },
+                    { type: 'video', src: "Videos/video 26.mp4" },
+                    { type: 'img', src: "Pictures/0jb002_2-1-2.jpg" },
+                    { type: 'video', src: "Videos/video 12.mp4" },
+
+                    // Group 3
+                    { type: 'img', src: "Pictures/0jg008_8.jpg" },
+                    { type: 'video', src: "Videos/video 25.mp4" },
+                    { type: 'img', src: "Pictures/0jghh006_6.jpg" },
+                    { type: 'img', src: "Pictures/000jl8_8-3.jpg" },
+                    { type: 'video', src: "Videos/video 2.mp4" },
+
+                    // Group 4
+                    { type: 'img', src: "Pictures/00khjk03_3.jpg" },
+                    { type: 'video', src: "Videos/video 24.mp4" },
+                    { type: 'img', src: "Pictures/00kk08_8-8.jpg" },
+                    { type: 'img', src: "Pictures/0s010_10 2.jpg" },
+                    { type: 'video', src: "Videos/video 4.mp4" },
+
+                    // Group 5
+                    { type: 'img', src: "Pictures/0y009_9.jpg" },
+                    { type: 'video', src: "Videos/video 23.mp4" },
+                    { type: 'img', src: "Pictures/0001_1 3.jpg" },
+                    { type: 'img', src: "Pictures/0001_1.jpg" },
+                    { type: 'video', src: "Videos/video 5.mp4" },
+
+                    // Group 6
+                    { type: 'img', src: "Pictures/SSP_433-40.jpg" },
+                    { type: 'video', src: "Videos/video 22.mp4" },
+                    { type: 'img', src: "Pictures/SSP_401-38.jpg" },
+                    { type: 'img', src: "Pictures/SSP_231-3.jpg" },
+                    { type: 'video', src: "Videos/video 6.mp4" },
+
+                    // Group 7
+                    { type: 'img', src: "Pictures/SSP_193-41.jpg" },
+                    { type: 'video', src: "Videos/video 21.mp4" },
+                    { type: 'img', src: "Pictures/SSP_121-24.jpg" },
+                    { type: 'img', src: "Pictures/SSP_66-17.jpg" },
+                    { type: 'video', src: "Videos/video 7.mp4" },
+
+                    // Group 8
+                    { type: 'img', src: "Pictures/SSP_27-9.jpg" },
+                    { type: 'video', src: "Videos/video 20.mp4" },
+                    { type: 'img', src: "Pictures/000724170001_1-1.jpg" },
+                    { type: 'img', src: "Pictures/000724160006_6-3.jpg" },
+                    { type: 'video', src: "Videos/video 8.mp4" },
+
+                    // Group 9
+                    { type: 'img', src: "Pictures/000686340001_1-20.jpg" },
+                    { type: 'video', src: "Videos/video 18.mp4" },
+                    { type: 'img', src: "Pictures/000686330008_8-18.jpg" },
+                    { type: 'img', src: "Pictures/000686330007_7-17.jpg" },
+                    { type: 'video', src: "Videos/video 9.mp4" },
+
+                    // Group 10
+                    { type: 'img', src: "Pictures/000686330006_6-16.jpg" },
+                    { type: 'video', src: "Videos/video 17.mp4" },
+                    { type: 'img', src: "Pictures/000686330002_2-12.jpg" },
+                    { type: 'img', src: "Pictures/000686320010_10-10.jpg" },
+                    { type: 'video', src: "Videos/video 10.mp4" },
+
+                    // Group 11
+                    { type: 'img', src: "Pictures/000686320009_9-9.jpg" },
+                    { type: 'video', src: "Videos/video 3.mp4" },
+                    { type: 'img', src: "Pictures/000686320006_6-6.jpg" },
+                    { type: 'img', src: "Pictures/000686320005_5-5.jpg" },
+                    { type: 'video', src: "Videos/video 11.mp4" },
+
+                    // Group 12
+                    { type: 'img', src: "Pictures/000686320003_3-3.jpg" },
+                    { type: 'video', src: "Videos/video 16.mp4" },
+                    { type: 'img', src: "Pictures/000686320001_1-1.jpg" },
+                    { type: 'img', src: "Pictures/000681000007_7-9.jpg" },
+                    { type: 'video', src: "Videos/video 12.mp4" },
+
+                    // Group 13
+                    { type: 'img', src: "Pictures/000681000006_6-8.jpg" },
+                    { type: 'video', src: "Videos/video 15.mp4" },
+                    { type: 'img', src: "Pictures/000681000002_2-4.jpg" },
+                    { type: 'img', src: "Pictures/000679990002_2-2.jpg" },
+                    { type: 'video', src: "Videos/video 13.mp4" },
+
+                    // Group 14
+                    { type: 'img', src: "Pictures/000679990001_1-1.jpg" },
+                    // Add two more images here if available
+                    { type: 'video', src: "Videos/video 14.mp4" },
+
+                ];
+            
+                // Divide media into 6 columns
+                const columns = [[], [], [], [], [], []];
+                let columnIndex = 0;
+                
+                media.forEach(item => {
+                    columns[columnIndex].push(item);
+                    columnIndex = (columnIndex + 1) % 6;
+                });
+
+                // Create columns with alternating scroll directions
+                columns.forEach((column, index) => {
+                    document.write(`
+                        <div class="column ${index % 2 === 1 ? 'column-reverse' : ''}">
+                            <div class="scroll-content">
+                                ${column.map(item => {
+                                    if (item.type === 'img') {
+                                        return `<img src="${item.src}" alt="Image" loading="lazy">`;
+                                    } else {
+                                        return `<video autoplay muted loop playsinline>
+                                            <source src="${item.src}" type="video/mp4">
+                                        </video>`;
+                                    }
+                                }).join('')}
+                            </div>
+                        </div>
+                    `);
+                });
+
+                // Add smooth scroll behavior with momentum
+                let scrolling = {};
+
+                document.addEventListener('wheel', (e) => {
+                    const column = e.target.closest('.column');
+                    if (!column) return;
+
+                    e.preventDefault();
+                    const columnIndex = parseInt(column.dataset.column);
+                    
+                    // Initialize or reset scrolling state for this column
+                    if (!scrolling[columnIndex]) {
+                        scrolling[columnIndex] = {
+                            velocity: 0,
+                            targetPosition: column.scrollTop
+                        };
+                    }
+
+                    // Calculate new velocity with momentum
+                    const scrollMultiplier = 1.2; // Adjust this value to change scroll sensitivity
+                    const deltaY = e.deltaY * scrollMultiplier;
+                    
+                    if (columnIndex % 2 === 0) {
+                        scrolling[columnIndex].velocity += deltaY;
+                    } else {
+                        scrolling[columnIndex].velocity -= deltaY;
+                    }
+
+                    // Start animation if not already running
+                    if (!scrolling[columnIndex].animating) {
+                        scrolling[columnIndex].animating = true;
+                        animateScroll(column, columnIndex);
+                    }
+                }, { passive: false });
+
+                function animateScroll(column, columnIndex) {
+                    const friction = 0.95; // Adjust this value to change how quickly scrolling slows down
+                    const scrollState = scrolling[columnIndex];
+                    
+                    // Apply friction to velocity
+                    scrollState.velocity *= friction;
+
+                    // Update scroll position
+                    let newScrollTop = column.scrollTop + scrollState.velocity;
+                    
+                    // Handle infinite scroll
+                    const scrollHeight = column.scrollHeight / 3;
+                    if (newScrollTop >= scrollHeight * 2) {
+                        newScrollTop = scrollHeight;
+                    } else if (newScrollTop <= 0) {
+                        newScrollTop = scrollHeight;
+                    }
+                    
+                    column.scrollTop = newScrollTop;
+
+                    // Continue animation if there's still significant movement
+                    if (Math.abs(scrollState.velocity) > 0.1) {
+                        requestAnimationFrame(() => animateScroll(column, columnIndex));
+                    } else {
+                        scrollState.animating = false;
+                        scrollState.velocity = 0;
+                    }
+                }
+
+                // Initialize scroll positions
+                document.querySelectorAll('.column').forEach(column => {
+                    const scrollHeight = column.scrollHeight / 3;
+                    column.scrollTop = scrollHeight;
+                });
+
+                // Optional: Add touch support for mobile devices
+                let touchStartY = 0;
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: false });
+
+                document.addEventListener('touchmove', (e) => {
+                    const column = e.target.closest('.column');
+                    if (!column) return;
+
+                    e.preventDefault();
+                    const deltaY = touchStartY - e.touches[0].clientY;
+                    touchStartY = e.touches[0].clientY;
+
+                    const columnIndex = parseInt(column.dataset.column);
+                    if (!scrolling[columnIndex]) {
+                        scrolling[columnIndex] = {
+                            velocity: 0,
+                            targetPosition: column.scrollTop
+                        };
+                    }
+
+                    if (columnIndex % 2 === 0) {
+                        scrolling[columnIndex].velocity += deltaY;
+                    } else {
+                        scrolling[columnIndex].velocity -= deltaY;
+                    }
+
+                    if (!scrolling[columnIndex].animating) {
+                        scrolling[columnIndex].animating = true;
+                        animateScroll(column, columnIndex);
+                    }
+                }, { passive: false });
+            </script>
+        </div>
+    </main>
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="">
+        <video id="lightbox-video" autoplay muted loop playsinline controls></video>
+    </div>
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const video = document.getElementById('lightbox-video');
+            
+            if (src.endsWith('.mp4')) {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.src = src;
+            } else {
+                video.style.display = 'none';
+                img.style.display = 'block';
+                img.src = src;
+            }
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
