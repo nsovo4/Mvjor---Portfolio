@@ -124,6 +124,19 @@
             gap: 300px;
             margin-top: 0px;
         }
+
+        @media (max-width: 768px) {
+        .social-links {
+            gap: 200px; /* Reduce the gap between social links */
+            flex-wrap: wrap; /* Allow links to wrap to the next line */
+        }
+    }
+
+        @media (max-width: 480px) {
+        .social-links {
+            gap: 100px; /* Further reduce the gap for smaller screens */
+        }
+    }
     </style>
 </head>
 <body>
