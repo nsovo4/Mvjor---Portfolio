@@ -20,6 +20,7 @@
             background-color: #ffffff;
             padding: 1em 0;
         }
+
         nav ul {
             list-style: none;
             display: flex;
@@ -27,22 +28,26 @@
             margin: 0;
             padding: 0;
         }
+
         nav li {
             margin: 0 1em;
         }
+
         nav a {
             color: #ff0000;
             text-decoration: none;
             font-family: Avenir, 'Avenir Next';
             font-size: 1.2em;
         }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            height: 100vh;
+            min-height: 100vh;
             gap: 10px;
             padding: 10px;
         }
+
         .column {
             display: flex;
             flex-direction: column;
@@ -52,26 +57,32 @@
             scrollbar-width: none; 
             scroll-behavior: smooth; 
         }
+
         .column-reverse {
             transform: scaleY(-1);
         }
+
         .column-reverse > * {
             transform: scaleY(-1);
         }
+
         .scroll-content {
             display: flex;
             flex-direction: column;
             gap: 10px;
             will-change: transform; 
         }
+
         .column img, .column video {
             width: 100%;
             height: auto;
             border-radius: 10px;
         }
+
         .column::-webkit-scrollbar {
             display: none;
         }
+
         .lightbox {
             position: fixed;
             top: 0; left: 0;
@@ -84,24 +95,31 @@
             opacity: 0;
             transition: opacity 0.3s, visibility 0.3s;
         }
+
         .lightbox img, .lightbox video {
             max-width: 90%;
             max-height: 80%;
         }
+
         .lightbox.active {
             visibility: visible;
             opacity: 1;
         }
-        footer {
-            background-color: #222;
-            padding: 1em 0;
-            margin-top: 20px;
-        }
 
         @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .gallery {
+            grid-template-columns: repeat(3, 1fr); 
+           }
+        }
+
+        @media (max-width: 480px) {
+        .gallery {
+            grid-template-columns: 1fr; 
+           }
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
