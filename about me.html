@@ -21,32 +21,6 @@
             content: none;
         }
 
-        .background-container {
-            width: 100px;
-            height: 100px;
-            padding: 100px;
-            margin: auto;
-            background-image: url('Pictures/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .background-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: inherit;
-            filter: blur(8px);
-            z-index: -1;
-        }
-
         header {
             background-color: #ffffff;
             padding: 1em 0;
@@ -71,7 +45,7 @@
 
         .quote {
             font-family: Avenir, 'Avenir Next';
-            font-size: 2.5em;
+            font-size: 2em;
             padding: 70px;
             font-weight: bold;
             margin-bottom: 50px;
@@ -147,12 +121,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 600px;
+            gap: 300px;
             margin-top: -100px;
         }
 
         @media (max-width: 768px) {
-            .profile-picture {
+            .background-container {
                 width: 60px; /* Adjust the width as needed */
                 height: 60px; /* Adjust the height as needed */
             }
@@ -164,7 +138,7 @@
         }
 
         @media (max-width: 480px) {
-            .profile-picture {
+            .background-container {
                 width: 60px; /* Further reduce the size for smaller screens */
                 height: 60px; /* Further reduce the size for smaller screens */
             }
