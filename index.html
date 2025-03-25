@@ -264,35 +264,45 @@
             // Group 14
             { type: "img", src: "Pictures/000679990001_1-1.jpg" },
             { type: "video", src: "Videos/video14.mp4" },
+            { type: "img", src: "Pictures/SSP_433-40.jpg" },
+            { type: "img", src: "Pictures/SSP_121-24.jpg" },
+            { type: "video", src: "Videos/video1.mp4" },
           ];
 
           const columns = [[], [], [], [], [], []];
-          let columnIndex = 0;
-
+          let columnHeights = [0, 0, 0, 0, 0, 0];
+          
           media.forEach((item) => {
-            columns[columnIndex].push(item);
-            columnIndex = (columnIndex + 1) % 6;
+            // Find the column with the smallest height
+            const minHeightIndex = columnHeights.indexOf(Math.min(...columnHeights));
+            
+            // Add item to shortest column
+            columns[minHeightIndex].push(item);
+            
+            // Update the column height (approximate using a standard height)
+            // Images are generally taller than videos in your layout
+            columnHeights[minHeightIndex] += item.type === "img" ? 300 : 200;
           });
 
           columns.forEach((column) => {
-                    document.write(`
-                        <div class="column">
-                            <div class="scroll-content">
-                                ${column.map((item) => {
-                                    if (item.type === "img") {
-                                        return `<img src="${item.src}" alt="Image">`;
-                                    } else {
-                                        return `<video autoplay muted loop playsinline>
-                                            <source src="${item.src}" type="video/mp4">
-                                        </video>`;
-                                    }
-                                }).join("")}
-                            </div>
-                        </div>
-                    `);
-                });
-            </script>
-        </div>
+            document.write(`
+              <div class="column">
+                <div class="scroll-content">
+                  ${column.map((item) => {
+                    if (item.type === "img") {
+                      return `<img src="${item.src}" alt="Image" loading="lazy">`;
+                    } else {
+                      return `<video autoplay muted loop playsinline>
+                        <source src="${item.src}" type="video/mp4">
+                      </video>`;
+                    }
+                  }).join("")}
+                </div>
+              </div>
+            `);
+          });
+        </script>
+      </div>
     </main>
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
