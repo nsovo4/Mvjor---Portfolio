@@ -120,7 +120,6 @@
           scroll-behavior: smooth;
       }
 
-      /* Loader styles */
       #loader {
           position: fixed;
           top: 0;
@@ -135,12 +134,12 @@
       }
 
       .spinner {
-          border: 8px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
-          border-top: 8px solid #ff0000; /* Bright orange border for the top */
-          border-radius: 50%; /* Fully rounded */
-          width: 80px; /* Smaller size for a sleeker look */
+          border: 8px solid rgba(255, 255, 255, 0.2); 
+          border-top: 8px solid #ff0000; 
+          border-radius: 50%; 
+          width: 80px; 
           height: 80px;
-          animation: spin 1.5s linear infinite; /* Faster spin for a modern feel */
+          animation: spin 1.5s linear infinite; 
       }
 
       @keyframes spin {
@@ -273,14 +272,10 @@
           let columnHeights = [0, 0, 0, 0, 0, 0];
           
           media.forEach((item) => {
-            // Find the column with the smallest height
             const minHeightIndex = columnHeights.indexOf(Math.min(...columnHeights));
             
-            // Add item to shortest column
             columns[minHeightIndex].push(item);
             
-            // Update the column height (approximate using a standard height)
-            // Images are generally taller than videos in your layout
             columnHeights[minHeightIndex] += item.type === "img" ? 300 : 200;
           });
 

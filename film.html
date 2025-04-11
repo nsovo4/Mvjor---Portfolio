@@ -1,129 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mvjor - Portfolio</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+        color: #fff;
+        text-align: center;
+        min-height: 100vh;
+      }
+      header {
+        background-color: #ffffff;
+        padding: 1em 0;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+      }
+      nav li {
+        margin: 0 1em;
+      }
+      nav a {
+        color: #ff0000;
+        text-decoration: none;
+        font-family: Avenir, "Avenir Next";
+        font-size: 1.2em;
+      }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            color: #fff;
-            text-align: center;
-            min-height: 100vh;
-        }
-        header {
-            background-color: #ffffff;
-            padding: 1em 0;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-        nav li {
-            margin: 0 1em;
-        }
-        nav a {
-            color: #ff0000;
-            text-decoration: none;
-            font-family: Avenir, 'Avenir Next';
-            font-size: 1.2em;
-        }
-        
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 768px) {
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+          grid-template-columns: repeat(3, 1fr);
         }
+      }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
+      @media (max-width: 480px) {
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+      #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
 
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
+      .spinner {
+        border: 8px solid rgba(255, 255, 255, 0.2);
+        border-top: 8px solid #ff0000;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 1.5s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        
-        html {
-            scroll-behavior: smooth;
+        100% {
+          transform: rotate(360deg);
         }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="film.html">Film</a></li>
-                <li><a href="photo.html">Photography</a></li>
-                <li><a href="about me.html">About Me</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="film.html">Film</a></li>
+          <li><a href="photo.html">Photography</a></li>
+          <li><a href="about me.html">About Me</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <div class="gallery">
-            <script>
-                const videos = [
-                    "Videos/v3.mp4",
-                    "Videos/video1.mp4",
-                    "Videos/video2.mp4",
-                    "Videos/v2.mp4",
-                    "Videos/video6.mp4",
-                    "Videos/v1.mp4",
-                    "Videos/video7.mp4",
-                    "Videos/video8.mp4",
-                    "Videos/video9.mp4",
-                    "Videos/video 10.mp4",
-                    "Videos/video11.mp4",
-                    "Videos/v4.mp4",
-                    "Videos/video12.mp4",
-                    "Videos/video13.mp4",
-                    "Videos/video14.mp4",
-                    "Videos/video15.mp4",
-                    "Videos/video5.mp4",
-                    "Videos/video16.mp4",
-                    "Videos/video17.mp4",
-                    "Videos/video18.mp4",
-                    "Videos/video20.mp4",
-                    "Videos/video21.mp4",
-                    "Videos/video22.mp4",
-                    "Videos/video23.mp4",
-                    "Videos/video24.mp4",
-                    "Videos/video25.mp4",
-                    "Videos/video3.mp4",
-                    "Videos/video26.mp4",
-                    "Videos/video27.mp4",
-                    "Videos/v5.mp4",
-                ]
+      <div class="gallery">
+        <script>
+          const videos = [
+            "Videos/v3.mp4",
+            "Videos/video1.mp4",
+            "Videos/video2.mp4",
+            "Videos/v2.mp4",
+            "Videos/video6.mp4",
+            "Videos/v1.mp4",
+            "Videos/video7.mp4",
+            "Videos/video8.mp4",
+            "Videos/video9.mp4",
+            "Videos/video 10.mp4",
+            "Videos/video11.mp4",
+            "Videos/v4.mp4",
+            "Videos/video12.mp4",
+            "Videos/video13.mp4",
+            "Videos/video14.mp4",
+            "Videos/video15.mp4",
+            "Videos/video5.mp4",
+            "Videos/video16.mp4",
+            "Videos/video17.mp4",
+            "Videos/video18.mp4",
+            "Videos/video20.mp4",
+            "Videos/video21.mp4",
+            "Videos/video22.mp4",
+            "Videos/video23.mp4",
+            "Videos/video24.mp4",
+            "Videos/video25.mp4",
+            "Videos/video3.mp4",
+            "Videos/video26.mp4",
+            "Videos/video27.mp4",
+            "Videos/v5.mp4",
+          ];
 
-                videos.forEach(videoSrc => {
-                    document.write(`
+          videos.forEach((videoSrc) => {
+            document.write(`
                         <div class="video-container">
                             <a href="https://vimeo.com/user109601286" target="_blank" style="text-decoration: none;">
                                 <video 
@@ -139,30 +172,43 @@
                             </a>
                         </div>
                     `);
-                });
+          });
 
-                // Add intersection observer for better performance
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        const video = entry.target.querySelector('video');
-                        if (entry.isIntersecting) {
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
-                    });
-                }, {
-                    threshold: 0.5
-                });
+          // Add intersection observer for better performance
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                const video = entry.target.querySelector("video");
+                if (entry.isIntersecting) {
+                  video.play();
+                } else {
+                  video.pause();
+                }
+              });
+            },
+            {
+              threshold: 0.5,
+            }
+          );
 
-                // Observe all video containers
-                document.querySelectorAll('.video-container').forEach(container => {
-                    observer.observe(container);
-                });
-            </script>
-        </div>
+          // Observe all video containers
+          document.querySelectorAll(".video-container").forEach((container) => {
+            observer.observe(container);
+          });
+        </script>
+      </div>
     </main>
-</body>
-</html>
 
-    
+    <script>
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        if (loader) {
+          loader.style.opacity = "0"; 
+          setTimeout(() => {
+            loader.style.display = "none"; 
+          }, 500); 
+        }
+      });
+    </script>
+  </body>
+</html>
