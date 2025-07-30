@@ -21,5 +21,5 @@
 
 - **Frontend:** HTML5, CSS3 (using Flexbox), JavaScript  
 - **Optional:** jQuery for lightbox, carousel, and smooth scrolling  
-- **Hosting:** GitHub Pages via the `main` branch (GitHub Pages used for live demo)
+- **Hosting:** GitHub Pages via the `main` branch (GitHub Pages used for live demo) https://nsovo4.github.io/Mvjor---Portfolio/
 
